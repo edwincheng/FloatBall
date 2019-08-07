@@ -20,7 +20,7 @@ public class FloatBallService extends Service {
     @Override
     public void onCreate() {
         ViewManager manager = ViewManager.getInstance(this);
-        manager.showFloatBall();
+        manager.addFloatBall();
         super.onCreate();
     }
 

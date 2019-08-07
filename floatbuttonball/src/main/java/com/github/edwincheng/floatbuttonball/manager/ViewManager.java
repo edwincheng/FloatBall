@@ -2,10 +2,8 @@ package com.github.edwincheng.floatbuttonball.manager;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.os.Build;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -115,7 +113,7 @@ public class ViewManager {
     }
 
     //显示浮动小球
-    public void showFloatBall() {
+    public void addFloatBall() {
         if (floatBallParams == null) {
             floatBallParams = new LayoutParams();
             floatBallParams.width = floatBall.width;
@@ -123,6 +121,7 @@ public class ViewManager {
             floatBallParams.gravity = Gravity.TOP | Gravity.START;
             floatBallParams.flags = LayoutParams.FLAG_NOT_FOCUSABLE | LayoutParams.FLAG_NOT_TOUCH_MODAL;
             floatBallParams.format = PixelFormat.RGBA_8888;
+            floatBallParams.y = ScreenUtils.getScreenHeight(context) / 3;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 floatBallParams.type = LayoutParams.TYPE_APPLICATION_OVERLAY;
             } else {
@@ -132,6 +131,18 @@ public class ViewManager {
         windowManager.addView(floatBall, floatBallParams);
     }
 
+    public void showFloatBall() {
+        if (windowManager != null && floatBallParams != null
+                && floatBall != null && floatBall.getVisibility() == View.GONE){
+            floatBall.setVisibility(View.VISIBLE);
+        }
+    }
 
+    public void hideFloatBall() {
+        if (windowManager != null && floatBallParams != null
+                && floatBall != null && floatBall.getVisibility() == View.VISIBLE){
+            floatBall.setVisibility(View.GONE);
+        }
+    }
 
 }
